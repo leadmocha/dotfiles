@@ -1,7 +1,14 @@
 "" First things first. Load up any system files if they exist
+"" Ubuntu/Debian systems
 if filereadable('/etc/vim/vimrc')
-  source /etc/vim/vimrc " Ubuntu/Debian systems
+  source /etc/vim/vimrc
 endif
+
+"" Fedora based systems
+if filereadable('/etc/vimrc')
+  source /etc/vimrc
+endif
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" Now make changes as needed
