@@ -1,3 +1,7 @@
+void AddColor(Int_t color, Double_t r, Double_t g, Double_t b, TString name) {
+  (void*)new TColor(color,r,g,b);
+}
+
 void jc2_style() {
   gROOT->SetStyle("Plain");
   gStyle->SetPaperSize(TStyle::kUSLetter);
@@ -6,7 +10,7 @@ void jc2_style() {
   gStyle->SetPalette(1);
   gStyle->SetNdivisions(505);
 
-  gStyle->SetCanvasColor(10);
+  gStyle->SetCanvasColor(0);
   gStyle->SetPadTopMargin(.075);
   gStyle->SetPadLeftMargin(.15);
   gStyle->SetPadRightMargin(.1);
@@ -43,4 +47,14 @@ void jc2_style() {
   gStyle->SetTitleX(0.5);
   gStyle->SetTitleY(1.0);
   gStyle->SetTitleFillColor(0);
+
+
+  // Add the colors I like
+  AddColor(1756, 52./255.,164./255.,237./255.,"Some blue");
+  AddColor(1757, 203./255.,31./255.,31./255.,"Some red");
+  AddColor(1758, 212./255.,115./255.,212./255.,"Deep mauve");
+  AddColor(1759, 141./255.,182./255.,0./255.,"Apple green");
+  AddColor(1760, 61./255.,43./255.,31./255.,"Briste (brown)");
+  AddColor(1761, 191./255.,255./255.,0./255.,"Lime (green)");
+  AddColor(1762, 237./255.,135./255.,45./255.,"Cadmium Orange");
 }
