@@ -1,7 +1,14 @@
 "" First things first. Load up any system files if they exist
+"" Ubuntu/Debian systems
 if filereadable('/etc/vim/vimrc')
-  source /etc/vim/vimrc " Ubuntu/Debian systems
+  source /etc/vim/vimrc
 endif
+
+"" Fedora based systems
+if filereadable('/etc/vimrc')
+  source /etc/vimrc
+endif
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" Now make changes as needed
@@ -76,18 +83,24 @@ set completeopt=menuone,menu,longest,preview
 " To make mouse work with TMUX
 "set mouse=a
 
-set rtp+=~/.local/lib/python2.7/site-packages/powerline/powerline/bindings/vim
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
 
-set laststatus=2 " Always display the statusline in all windows
-set guifont=Inconsolata\ for\ Powerline:h14
+"" Load up powerline if config exists
+if filereadable('~/.vim/vimrc_coding_powerline')
+  source ~/.vim/vimrc_coding_powerline
+endif
+
+"set rtp+=~/.local/lib/python2.7/site-packages/powerline/powerline/bindings/vim
+"python from powerline.vim import setup as powerline_setup
+"python powerline_setup()
+"python del powerline_setup
+
+"set laststatus=2 " Always display the statusline in all windows
+"set guifont=Inconsolata\ for\ Powerline:h14
 "set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 
-let g:Powerline_symbols = 'fancy'
-let g:Powerline_dividers_override = ["\Ue0b0", "\Ue0b1", "\Ue0b2", "\Ue0b3"]
-let g:Powerline_symbols_override = { 'BRANCH': "\Ue0a0", 'LINE': "\Ue0a1", 'RO': "\Ue0a2" }
+"let g:Powerline_symbols = 'fancy'
+"let g:Powerline_dividers_override = ["\Ue0b0", "\Ue0b1", "\Ue0b2", "\Ue0b3"]
+"let g:Powerline_symbols_override = { 'BRANCH': "\Ue0a0", 'LINE': "\Ue0a1", 'RO': "\Ue0a2" }
 
 "" Load up a plugin manager (Pathogen)
 execute pathogen#infect()
