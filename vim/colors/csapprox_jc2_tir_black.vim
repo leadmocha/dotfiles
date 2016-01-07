@@ -378,7 +378,7 @@ elseif has("gui_running") || &t_Co == 256
     CSAHi vimHiTermcap term=NONE cterm=NONE ctermbg=bg ctermfg=fg gui=NONE guibg=bg guifg=fg
     CSAHi vimCommentTitleLeader term=NONE cterm=NONE ctermbg=bg ctermfg=fg gui=NONE guibg=bg guifg=fg
     CSAHi vimSynRegion term=NONE cterm=NONE ctermbg=bg ctermfg=fg gui=NONE guibg=bg guifg=fg
-    CSAHi SpecialKey term=bold cterm=NONE ctermbg=236 ctermfg=244 gui=NONE guibg=#343434 guifg=#808080
+    CSAHi SpecialKey term=bold cterm=NONE ctermbg=bg ctermfg=244 gui=NONE guibg=#343434 guifg=#808080
     CSAHi NonText term=bold cterm=NONE ctermbg=16 ctermfg=235 gui=bold guibg=black guifg=#262626
     CSAHi Directory term=bold cterm=NONE ctermbg=bg ctermfg=51 gui=NONE guibg=bg guifg=Cyan
     CSAHi ErrorMsg term=NONE cterm=NONE ctermbg=203 ctermfg=231 gui=bold guibg=#FF6C60 guifg=white
