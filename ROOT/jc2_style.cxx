@@ -1,5 +1,5 @@
 void AddColor(Int_t color, Double_t r, Double_t g, Double_t b, TString name) {
-  (void*)new TColor(color,r,g,b);
+  (void)new TColor(color,r,g,b);
 }
 
 void jc2_style() {
