@@ -143,4 +143,6 @@ hi SignColumn guifg=#202020 guibg=#202020
 "  highlight OverLength guibg=#592929
 "  match OverLength /\%81v.\+/
 "endif
-set colorcolumn=80
+if v:version >= 703
+  set colorcolumn=80
+endif
