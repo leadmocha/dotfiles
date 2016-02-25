@@ -47,7 +47,11 @@ set shiftwidth=2  " Like tabstop but for indentations
 set softtabstop=2 " Formatting tabstops
 
 "" Higlight special characters with other special characters :D
-set list listchars=tab:»·,trail:· 
+if v:version < 703
+  set list listchars=tab:��,trail:� 
+else
+  set list listchars=tab:»·,trail:· 
+endif
 
 "" In case the CSApprox plugin is used, configure it now
 "" This plugin converts GUI colors to appropriate cterm colors
