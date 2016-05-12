@@ -47,11 +47,9 @@ set shiftwidth=2  " Like tabstop but for indentations
 set softtabstop=2 " Formatting tabstops
 
 "" Higlight special characters with other special characters :D
-if v:version < 703
-  set list listchars=tab:��,trail:� 
-else
-  set list listchars=tab:»·,trail:· 
-endif
+"set list listchars=tab:Â»Â·,trail:Â· 
+"set list listchars=tab:»·,trail:··
+set list listchars=tab:��,trail:� 
 
 "" In case the CSApprox plugin is used, configure it now
 "" This plugin converts GUI colors to appropriate cterm colors
@@ -112,11 +110,12 @@ execute pathogen#infect()
 
 "" Configure indentLine plugin
 "" Commented out, use default
-"let g:indentLine_char='︙'
+"let g:indentLine_char='ï¸'
 "let g:indentLine_color_term=244
 
 "" Configure the eclim pluggin
-let g:EclimLoclistSignText='»·'
+"let g:EclimLoclistSignText='Â»Â·'
+let g:EclimLoclistSignText='��'
 let g:EclimInfoHighlight = 'Normal'
 let g:EclimWarningHighlight = 'Normal'
 let g:EclimErrorHighlight = 'Normal'
