@@ -115,7 +115,8 @@ execute pathogen#infect()
 
 "" Configure the eclim pluggin
 "let g:EclimLoclistSignText='Ã‚Â»Ã‚Â·'
-let g:EclimLoclistSignText='»·'
+"let g:EclimLoclistSignText='»·'
+let g:EclimLoclistSignText = "\u00BB"
 let g:EclimInfoHighlight = 'Normal'
 let g:EclimWarningHighlight = 'Normal'
 let g:EclimErrorHighlight = 'Normal'
