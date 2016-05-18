@@ -46,6 +46,9 @@ set tabstop=2 " A tab represents this many spaces
 set shiftwidth=2  " Like tabstop but for indentations
 set softtabstop=2 " Formatting tabstops
 
+"" Set the encoding to UTF-8 so that all characters/symbols show up correctly
+set encoding=utf-8
+
 "" Higlight special characters with other special characters :D
 "set list listchars=tab:Â»Â·,trail:Â· 
 "set list listchars=tab:»·,trail:··
