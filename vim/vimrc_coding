@@ -124,3 +124,25 @@ let g:EclimInfoHighlight = 'Normal'
 let g:EclimWarningHighlight = 'Normal'
 let g:EclimErrorHighlight = 'Normal'
 let g:EclimXmlValidate=0 " Disable XML validation by default
+
+function! JLabXMLBatchBash() abort
+  let b:current_syntax = ""
+  unlet b:current_syntax
+  runtime! syntax/xml.vim
+
+  " Include XML syntax
+  let b:current_syntax = ""
+  unlet b:current_syntax
+  syntax include @XML syntax/xml.vim
+
+  " Include the shell syntax
+  let b:current_syntax = ""
+  unlet b:current_syntax
+  syntax include @SHELL syntax/sh.vim
+  syntax region bashSnip matchgroup=Snip start="<Command><!\[CDATA\[" end="]]></Command>" containedin=@XML contains=@SHELL
+  hi link Snip SpecialComment
+endfunction
+" Call JLabXMLBatchBash immediately after loading an XML file
+augroup xmlFileType
+  autocmd! FileType xml :call JLabXMLBatchBash()
+augroup END
