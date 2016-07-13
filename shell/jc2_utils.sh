@@ -1,5 +1,6 @@
 ###############################################################################
 ## JC2 useful utilities
+export JC2UTILSLOADED="1"
 
 ## Source file only if it exists
 function sourceIfExists()

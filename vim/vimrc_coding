@@ -94,6 +94,11 @@ if filereadable(expand("~/.vim/vimrc_coding_powerline"))
   source ~/.vim/vimrc_coding_powerline
 endif
 
+"" Load up "local" configurations if the file exists
+if filereadable(expand("~/.vim/vimrc_coding_local"))
+  source ~/.vim/vimrc_coding_local
+endif
+
 "set rtp+=~/.local/lib/python2.7/site-packages/powerline/powerline/bindings/vim
 "python from powerline.vim import setup as powerline_setup
 "python powerline_setup()
