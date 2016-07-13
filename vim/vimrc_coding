@@ -144,7 +144,7 @@ function! JLabXMLBatchBash() abort
   let b:current_syntax = ""
   unlet b:current_syntax
   syntax include @SHELL syntax/sh.vim
-  syntax region bashSnip matchgroup=Snip start="<Command><!\[CDATA\[" end="]]></Command>" containedin=@XML contains=@SHELL
+  syntax region bashSnip matchgroup=Snip start="<Command>" end="</Command>" containedin=@XML contains=@SHELL
   hi link Snip SpecialComment
 endfunction
 " Call JLabXMLBatchBash immediately after loading an XML file
