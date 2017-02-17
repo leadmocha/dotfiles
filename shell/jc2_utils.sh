@@ -8,6 +8,11 @@ function sourceIfExists()
   if [ -f $1 ];
   then
     source $1
+    if [ "$PS1" ]; then
+      source "$1"
+    else
+      source "$i" >/dev/null 2>&1
+    fi
   fi
 }
 
