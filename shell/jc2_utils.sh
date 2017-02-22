@@ -20,25 +20,39 @@ function sourceIfExists()
 ## Cleanly modify paths stored in a variable and separated by colons
 pathRemove()
 {
+  ## Check if a delimiter was specified. Otherwise use the default ":"
+  if [ "x$3" == "x" ];
+  then
+    delim=:
+  else
+    delim="$3"
+  fi
   ## Dereference the variable
   var=\$"$1"
   ## Get variable contents
-  val=`eval "expr \"${var}\" "`
+  val=`eval "expr \"${var}\""`
   ## Now remove the given path from this variable
-  eval "$1=`echo -n ${val} | awk -v RS=: -v ORS=: '$0 != "'$2'"' | sed 's/:$//'`"
+  eval "$1='`echo -n "${val}" | awk -v RS="${delim}" -v ORS="${delim}" '$0 != "'$2'"' | sed 's/'"${delim}"'$//' | sed 's/^'"${delim}"'//'`'"
 }
 pathAddClean()
 {
+  ## Check if a delimiter was specified. Otherwise use the default ":"
+  if [ -z "$4" ];
+  then
+    delim=:
+  else
+    delim="$4"
+  fi
   ## Dereference the variable
   var=\$"$1"  ## Deferencing the variable
   ## Get variable contents
   val=`eval "expr \"${var}\" "`
-  pathRemove $1 $2
+  pathRemove $1 "$2" "${delim}"
   ## Get the variable contents again
   val=`eval "expr \"${var}\" "`
 
   ## Check to see if it's empty or just a single colon
-  if [ -z ${val} ]; # || [ ${val} = "x" ];
+  if [[ "${val}x" == "x" || "${val}x" == "${delim}x" ]];
   then
     ## Variable is empty, so we can just add the path
     eval "$1=\"$2\""
@@ -48,21 +62,21 @@ pathAddClean()
     if [ -z $3 ] || [ $3 = "prepend" ];
     then
       ## Prepend the path
-      eval "$1=\"$2:${val}\""
+      eval "$1=\"$2${delim}${val}\""
     else
       ## Append the path
-      eval "$1=\"${val}:$2\""
+      eval "$1=\"${val}${delim}$2\""
     fi
   fi
 }
 
 pathPrependClean()
 {
-  pathAddClean $1 $2 prepend
+  pathAddClean $1 "$2" "prepend" "$3"
 }
 
 pathAppendClean()
 {
-  pathAddClean $1 $2 append
+  pathAddClean $1 "$2" "append" "$3"
 }
 
