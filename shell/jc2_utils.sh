@@ -7,11 +7,11 @@ function sourceIfExists()
 {
   if [ -f $1 ];
   then
-    source $1
+    #source $1
     if [ "$PS1" ]; then
-      source "$1"
+      source $*
     else
-      source "$i" >/dev/null 2>&1
+      source $* >/dev/null 2>&1
     fi
   fi
 }
