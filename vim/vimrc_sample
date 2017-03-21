@@ -1,0 +1,1 @@
+exe "source " . fnamemodify(resolve(expand('~/.vim/vimrc')),':h') . '/plugin/jc2.vim'

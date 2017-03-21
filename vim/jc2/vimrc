@@ -1,0 +1,28 @@
+"" First things first. Load up any system files if they exist and user asked
+"" for them.
+if(g:JC2UseSystemFiles)
+  "" Ubuntu/Debian systems
+  if filereadable('/etc/vim/vimrc')
+    source /etc/vim/vimrc
+  endif
+
+  "" Fedora based systems
+  if filereadable('/etc/vimrc')
+    source /etc/vimrc
+  endif
+endif
+
+"" Add to realtimepath
+exe 'set rtp+=' . g:JC2Path
+
+"" If the command line option --cmd 'let g:JC2UseCoding' is defined
+"" (or the user set g:JC2UseCoding in their vimrc file, then load up the
+"" coding file
+if exists('g:JC2UseCoding')
+  "execute pathogen#infect(g:JC2Path,'bundle/{}')
+  exe "source " . g:JC2Path . "/jc2/vimrc_coding"
+else
+endif
+
+"" Set the default color scheme
+colorscheme jc2_black

@@ -9,6 +9,12 @@ if filereadable('/etc/vimrc')
   source /etc/vimrc
 endif
 
+"" Load up a plugin manager (Pathogen)
+"" If pathogen not already loaded by the user, go ahead and load
+"" it now
+if g:JC2LoadPathogen
+  execute pathogen#infect()
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" Now make changes as needed
@@ -50,26 +56,37 @@ set softtabstop=2 " Formatting tabstops
 set encoding=utf-8
 
 "" Higlight special characters with other special characters :D
-"set list listchars=tab:Â»Â·,trail:Â· 
-"set list listchars=tab:»·,trail:··
-set list listchars=tab:��,trail:� 
+"set list listchars=tab:ÃÂ»ÃÂ·,trail:ÃÂ· 
+"set list listchars=tab:Â»Â·,trail:Â·Â·
+set list listchars=tab:»·,trail:· 
+
+" If you have vim >=8.0 or Neovim >= 0.1.5
+if (has("termguicolors"))
+ set termguicolors
+endif
+
+" For Neovim 0.1.3 and 0.1.4
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 "" In case the CSApprox plugin is used, configure it now
 "" This plugin converts GUI colors to appropriate cterm colors
 let g:CSApprox_attr_map = { 'bold' : '', 'italic' : '', 'sp' : '' }
 let g:CSApprox_loaded = 1 " Stop loading it for now, disable when I modify the scheme
-colorscheme jc2_tir_black " My usual color scheme
-colorscheme csapprox_jc2_tir_black " Colors corrected/approximated by CSApprox
+" Color schemes now set by the normal vimrc file in this 'plugin'
+"colorscheme jc2_tir_black " My usual color scheme
+"colorscheme jc2_black " My usual color scheme
+"colorscheme csapprox_jc2_tir_black " Colors corrected/approximated by CSApprox
+
 
 " """""""" These are for the OmniComplete feature!!! GREAT!
 
 " configure tags - add additional tags here or comment out not-used ones
-set tags+=~/.vim/tags/cpp
-set tags+=~/.vim/tags/gl
-set tags+=~/.vim/tags/sdl
-set tags+=~/.vim/tags/qt4
-set tags+=~/.vim/tags/root
-set tags+=~/.vim/tags/analyzer
+"set tags+=~/.vim/tags/cpp
+"set tags+=~/.vim/tags/gl
+"set tags+=~/.vim/tags/sdl
+"set tags+=~/.vim/tags/qt4
+"set tags+=~/.vim/tags/root
+"set tags+=~/.vim/tags/analyzer
 " build tags of your own project with CTRL+F12
 map <A-F5> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
@@ -90,46 +107,33 @@ set completeopt=menuone,menu,longest,preview
 
 
 "" Load up powerline if config exists
-if filereadable(expand("~/.vim/vimrc_coding_powerline"))
-  source ~/.vim/vimrc_coding_powerline
+if filereadable(expand( g:JC2Path . "/local/vimrc_coding_powerline"))
+  exe "source " . g:JC2Path . "/local/vimrc_coding_powerline"
 endif
 
 "" Load up "local" configurations if the file exists
-if filereadable(expand("~/.vim/vimrc_coding_local"))
-  source ~/.vim/vimrc_coding_local
+if filereadable(expand(g:JC2Path.'/local/vimrc_coding_local'))
+  exe "source " . g:JC2Path.'/local/vimrc_coding_local'
 endif
-
-"set rtp+=~/.local/lib/python2.7/site-packages/powerline/powerline/bindings/vim
-"python from powerline.vim import setup as powerline_setup
-"python powerline_setup()
-"python del powerline_setup
-
-"set laststatus=2 " Always display the statusline in all windows
-"set guifont=Inconsolata\ for\ Powerline:h14
-"set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
-
-"let g:Powerline_symbols = 'fancy'
-"let g:Powerline_dividers_override = ["\Ue0b0", "\Ue0b1", "\Ue0b2", "\Ue0b3"]
-"let g:Powerline_symbols_override = { 'BRANCH': "\Ue0a0", 'LINE': "\Ue0a1", 'RO': "\Ue0a2" }
-
-"" Load up a plugin manager (Pathogen)
-execute pathogen#infect()
 
 
 "" Configure indentLine plugin
 "" Commented out, use default
-"let g:indentLine_char='ï¸'
+"let g:indentLine_char='Ã¯Â¸Â'
 "let g:indentLine_color_term=244
 
 "" Configure the eclim pluggin
-"let g:EclimLoclistSignText='Â»Â·'
-"let g:EclimLoclistSignText='��'
+"let g:EclimLoclistSignText='ÃÂ»ÃÂ·'
+"let g:EclimLoclistSignText='»·'
 let g:EclimLoclistSignText = "\u00BB"
 let g:EclimInfoHighlight = 'Normal'
 let g:EclimWarningHighlight = 'Normal'
 let g:EclimErrorHighlight = 'Normal'
 let g:EclimXmlValidate=0 " Disable XML validation by default
+let g:EclimCSearchSingleResult  = 'tab drop'
 
+"" A function so that syntax highlighting can work inside a JLab's XML Batch
+"" submission script
 function! JLabXMLBatchBash() abort
   let b:current_syntax = ""
   unlet b:current_syntax
@@ -151,3 +155,7 @@ endfunction
 augroup xmlFileType
   autocmd! FileType xml :call JLabXMLBatchBash()
 augroup END
+
+"" Open up new split tabs either blow or at the right by default
+set splitbelow
+set splitright
