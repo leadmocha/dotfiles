@@ -25,7 +25,7 @@ let s:yellowp = "ffffb6"
 let s:greenm  = "afd75f"
 let s:green   = "afd75f"
 let s:greenp  = "9eee38"
-let s:bluem   = "34a4ed"
+let s:bluem   = "2679ad"
 let s:blue    = "34a4ed"
 let s:bluep   = "96cbee"
 let s:purplem = "c397d8"
@@ -107,7 +107,7 @@ call <SID>X("Function", s:blue, "", "")
 call <SID>X("Constant", s:purplep, "", "")
 call <SID>X("Boolean", s:redp, "", "")
 call <SID>X("Keyword", s:bluep, "", "")
-call <SID>X("Special", s:foreground, "", "")
+call <SID>X("Special", s:redp, "", "")
 call <SID>X("PreProc", s:purple, "", "")
 call <SID>X("Operator", s:aqua, "", "none")
 call <SID>X("Type", s:blue, "", "none")
@@ -197,10 +197,11 @@ call <SID>X("htmlArg", s:red, "", "")
 call <SID>X("htmlScriptTag", s:red, "", "")
 
 " Diff Highlighting
-call <SID>X("diffAdd", "", "4c4e39", "")
-call <SID>X("diffDelete", s:background, s:red, "")
+call <SID>X("diffAdd", s:line, s:yellowm, "")
+call <SID>X("diffDelete", s:background, s:redm, "")
 call <SID>X("diffChange", "", "2B5B77", "")
-call <SID>X("diffText", s:line, s:blue, "")
+call <SID>X("diffChange", s:background,s:bluem, "")
+call <SID>X("diffText", s:foreground, s:blue, "")
 
 " ShowMarks Highlighting
 call <SID>X("ShowMarksHLl", s:orange, s:background, "none")
