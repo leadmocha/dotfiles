@@ -154,3 +154,9 @@ augroup END
 "" Open up new split tabs either blow or at the right by default
 set splitbelow
 set splitright
+
+"" Define a new function to quickly fix syntax highlighting issues caused
+"" by splits
+function FixSyntax()
+  syntax sync fromstart
+endfunction
