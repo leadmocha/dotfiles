@@ -6,3 +6,6 @@ au BufNewFile,BufRead *.icc	set	filetype=cpp
 
 " Arduino code files (*.ino process as c++)
 au BufNewFile,BufRead *.ino	set	filetype=cpp
+
+" CODA readout language (*.crl process as c++)
+au BufNewFile,BufRead *.crl     set     filetype=crl
