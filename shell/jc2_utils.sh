@@ -80,3 +80,22 @@ pathAppendClean()
   pathAddClean $1 "$2" "append" "$3"
 }
 
+## Set a default value to a variable if variable empty or undefined
+setDefault()
+{
+  if [[ "x$1" == "x" || "x$2" == "x" ]];
+  then
+    ## Nothing to do...
+    return 2
+  fi
+
+  ## Dereference the variable
+  var=\$"$1"
+  ## Get variable contents
+  val=`eval "expr \"${var}\""`
+  if [ "x${val}" == "x" ];
+  then
+    ## Variable is unset, so set to default value
+    eval "$1=\"$2\""
+  fi
+}
