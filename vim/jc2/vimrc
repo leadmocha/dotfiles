@@ -31,3 +31,6 @@ endif
 
 "" Set the default color scheme
 colorscheme jc2_black
+
+"" Set a color column (color column is last allowed place for the line)
+set colorcolumn=80
