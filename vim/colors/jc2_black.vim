@@ -3,10 +3,17 @@
 ""
 "" True color only
 
+"" Define two special variables. The first we can use to leave a color
+"" unchanged. The second we use to specify that we want to remove
+"" the color.
+let s:UNCHANGE = ""
+let s:NONE = "NONE"
+
 "" Default GUI Colours
 "" (generic GUI items)
 let s:foreground = "f7f7f7"
-let s:background = "000000"
+"" Set background to nothing so that the transparent terminal works
+let s:background = s:NONE
 let s:selection = "4e4e4e"
 let s:window = "4d5057"
 let s:line = "121212"
@@ -41,18 +48,42 @@ let g:colors_name = "jc2_black"
 
 "" Set colors and attributes for given work
 if has("gui_running") || &t_Co == 88 || &t_Co == 256
-  fun <SID>X(group, fg, bg, attr)
-    if a:fg != ""
-      exec "hi " . a:group . " guifg=#" . a:fg
+  "" This function sets an element and appends a # as necessary to
+  "" passed value if its a color
+  fun <SID>XX(group,element,val,hex_val)
+    if a:val == s:NONE
+      let b:setVal = s:NONE
+    elseif a:hex_val
+      let b:setVal = "#" . a:val
+    else
+      let b:setVal = a:val
     endif
-    if a:bg != ""
-      exec "hi " . a:group . " guibg=#" . a:bg
-    endif
-    if a:attr != ""
-      exec "hi " . a:group . " gui=" . a:attr
+    if a:val != ""
+      exec "hi " . a:group . " " . a:element . "=" . b:setVal
     endif
   endfun
+
+  fun <SID>X(group, fg, bg, attr)
+    if a:fg != ""
+      call <SID>XX(a:group, "guifg", a:fg, 1)
+    endif
+    if a:bg != ""
+      call <SID>XX(a:group,"guibg",a:bg, 1)
+    endif
+    if a:attr != ""
+      call <SID>XX(a:group,"gui", a:attr, 0)
+    endif
+  endfun
+
 endif
+
+"" For simplicity, also include a link to another group already defined
+"" (so colors can be changed only once as needed)
+fun <SID>L(from,to)
+  if a:from != "" && a:to != ""
+    exec "hi link " . a:from . " " .a:to
+  endif
+endfun
 
 "" Configure highlights
 
@@ -66,7 +97,7 @@ call <SID>X("NonText", s:selection, "", "")
 
 call <SID>X("LineNr", s:selection, "", "")
 call <SID>X("SpecialKey", s:selection, "", "")
-call <SID>X("Search", s:background, s:yellow, "")
+call <SID>X("Search", s:UNCHANGE, s:yellow, "")
 call <SID>X("TabLine", s:window, s:foreground, "reverse")
 call <SID>X("TabLineFill", s:window, s:foreground, "reverse")
 call <SID>X("StatusLine", s:window, s:yellow, "reverse")
@@ -91,7 +122,8 @@ if version >= 700
 end
 if version >= 703
   call <SID>X("ColorColumn", "", s:selection, "reverse")
-  set colorcolumn=80
+  "" This should be moved out of the theme
+  ""set colorcolumn=80
 end
 
 " Standard Highlighting
@@ -304,13 +336,26 @@ call <SID>X("scalaConstructorSpecializer", s:yellow, "", "")
 call <SID>X("scalaBackTick", s:blue, "", "")
 
 " Git
+"" I forget what needed these two that are somehow different than the
+"" diffAdd and diffDelete
 call <SID>X("diffAdded", s:green, "", "")
 call <SID>X("diffRemoved", s:red, "", "")
-call <SID>X("gitcommitSummary", "", "", "bold")
+"" ???
+call <SID>L("gitcommitSummary",s:NONE)
+call <SID>X("gitcommitSummary", s:yellowm, "", "bold")
+"call <SID>X("gitcommitSummary", "", "", "")
+"" These vim-gitgutter variables can just be mapped to standard VIM diff colors
+call <SID>L("GitGutterAdd", "diffAdd")
+call <SID>L("GitGutterDelete", "diffDelete")
+call <SID>L("GitGutterChange", "diffChange")
+call <SID>L("GitGutterChangeDelete", "diffChange")
+
 "call <SID>X("gitcommitBlank", "", "", "")
 "call <SID>X("gitcommitBranch", "", "", "")
 "call <SID>X("gitcommitOverflow", s:blue, "", "")
 
 
 "" Cleanup our functions
+delf <SID>XX
 delf <SID>X
+delf <SID>L
