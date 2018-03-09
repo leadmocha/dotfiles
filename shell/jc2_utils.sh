@@ -81,6 +81,10 @@ pathAppendClean()
 }
 
 ## Set a default value to a variable if variable empty or undefined
+## Well, turns out there is a way better and easier version in bash
+## after all. The following works and is almost as short as this
+## : ${VAR_NAME:=DEFAULT-VALUE}
+## The colon in front is important for this to work
 setDefault()
 {
   if [[ "x$1" == "x" || "x$2" == "x" ]];
