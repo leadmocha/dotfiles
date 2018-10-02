@@ -97,7 +97,7 @@ call <SID>X("NonText", s:selection, "", "")
 
 call <SID>X("LineNr", s:selection, "", "")
 call <SID>X("SpecialKey", s:selection, "", "")
-call <SID>X("Search", s:UNCHANGE, s:yellow, "")
+call <SID>X("Search", s:selection, s:yellow, "")
 call <SID>X("TabLine", s:window, s:foreground, "reverse")
 call <SID>X("TabLineFill", s:window, s:foreground, "reverse")
 call <SID>X("StatusLine", s:window, s:yellow, "reverse")
