@@ -34,3 +34,7 @@ colorscheme jc2_black
 
 "" Set a color column (color column is last allowed place for the line)
 set colorcolumn=80
+
+""Disable modeline
+set modelines=0
+set nomodeline
