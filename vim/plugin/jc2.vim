@@ -18,6 +18,7 @@ if !exists('g:JC2Path')
 endif
 
 "" Configure whether pathogen should be loaded or not
+"" The default is to load pathogen unless explicitly disabled by the user
 if !exists("g:JC2LoadPathogen")
   let g:JC2LoadPathogen=1
 endif
