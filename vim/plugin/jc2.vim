@@ -17,6 +17,11 @@ if !exists('g:JC2Path')
   let g:JC2Path=fnamemodify(resolve(expand('<sfile>:p:h')),':h')
 endif
 
+"" Add a local path if one does not exist
+if !exists('g:JC2Local')
+  let g:JC2Local=g:JC2Path.'/local'
+endif
+
 "" Configure whether pathogen should be loaded or not
 "" The default is to load pathogen unless explicitly disabled by the user
 if !exists("g:JC2LoadPathogen")

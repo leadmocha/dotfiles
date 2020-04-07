@@ -13,7 +13,16 @@
 "" If pathogen not already loaded by the user, go ahead and load
 "" it now
 if g:JC2LoadPathogen
-  execute pathogen#infect()
+  if v:version >= 700
+    try
+      execute pathogen#infect()
+    catch
+      let g:JC2LoadPathogen=0
+    endtry
+  else
+    ""If too old a vim, then just try to execute it anyways
+    execute pathogen#infect()
+  endif
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -102,13 +111,13 @@ set completeopt=menuone,menu,longest,preview
 
 
 "" Load up powerline if config exists
-if filereadable(expand( g:JC2Path . "/local/vimrc_coding_powerline"))
-  exe "source " . g:JC2Path . "/local/vimrc_coding_powerline"
+if filereadable(expand( g:JC2Local . "/vimrc_coding_powerline"))
+  exe "source " . g:JC2Local . "/vimrc_coding_powerline"
 endif
 
 "" Load up "local" configurations if the file exists
-if filereadable(expand(g:JC2Path.'/local/vimrc_coding_local'))
-  exe "source " . g:JC2Path.'/local/vimrc_coding_local'
+if filereadable(expand(g:JC2Local.'/vimrc_coding_local'))
+  exe "source " . g:JC2Local.'/vimrc_coding_local'
 endif
 
 
