@@ -29,11 +29,25 @@ if exists('g:JC2UseCoding')
 else
 endif
 
+
+" Check if this is in a notes directory, or if has extension .notes.txt
+" In that case, we automatically set the text width to 81 characters
+if (fnamemodify(fnamemodify(resolve(expand('%')),':r'),':e') == "notes") || (filereadable(expand( fnamemodify(resolve(expand('%:p')),':h') . "/.vimnotes")))
+  set tw=80
+  " Also, try to see if the par command is available. If so, make it available
+  " when the user types = (in command mode)
+  if executable('par')
+    set equalprg=par\ -w80\ -P=\\#
+  endif
+endif
+
+
 "" Set the default color scheme
 colorscheme jc2_black
 
-"" Set a color column (color column is last allowed place for the line)
-set colorcolumn=80
+" Set a color column (color column is one character past last allowed place
+" for this line
+set colorcolumn=81
 
 ""Disable modeline
 set modelines=0
