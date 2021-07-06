@@ -37,9 +37,15 @@ if (fnamemodify(fnamemodify(resolve(expand('%')),':r'),':e') == "notes") || (fil
   " Also, try to see if the par command is available. If so, make it available
   " when the user types = (in command mode)
   if executable('par')
-    set equalprg=par\ -w80\ -P=\\#
+    set equalprg=par\ -w80\ -P=\\#,\\$,\\-
   endif
 endif
+
+" Check if this directory does not want us to save a swapfile
+if (filereadable(expand( fnamemodify(resolve(expand('%:p')),':h') . "/.vimnoswapfile")))
+  set noswapfile
+endif
+
 
 
 "" Set the default color scheme

@@ -18,6 +18,7 @@ let s:selection = "4e4e4e"
 let s:window = "4d5057"
 let s:line = "121212"
 let s:comment = "7c7c7c"
+let s:comment = "9f9f9f"
 "" Colors in wheel
 "" Minus is darker Plus is lighter
 let s:redm    = "8b0000"
